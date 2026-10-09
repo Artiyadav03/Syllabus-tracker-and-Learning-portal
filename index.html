@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reena Mehta College - Syllabus & Learning Portal</title>
+  <!-- Chart.js CDN for Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #2563eb;
+      --secondary: #d97706;
+      --accent: #10b981;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 50px; }
+
+    /* HIGH-RESOLUTION HEADER BANNER */
+    .header-banner-container {
+      background: #ffffff;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      border-bottom: 3px solid #1e3a8a;
+      padding: 8px 15px;
+    }
+    .header-banner-img {
+      max-width: 960px;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 4px;
+      image-rendering: -webkit-optimize-contrast;
+    }
+    .banner-fallback {
+      display: none;
+      padding: 16px;
+      background: linear-gradient(135deg, #1e3a8a, #0f172a);
+      color: white;
+      border-radius: 8px;
+    }
+
+    .container { max-width: 980px; margin: 25px auto; padding: 0 15px; }
+    
+    /* CARDS */
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border);
+    }
+    
+    /* BUTTONS */
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .btn:hover { background: var(--primary-light); transform: translateY(-2px); }
+    .btn-secondary { background: var(--secondary); }
+    .btn-secondary:hover { background: #b45309; }
+    .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+    .btn-outline:hover { background: var(--primary); color: white; }
+    .btn-back { background: #64748b; color: white; margin-bottom: 18px; font-size: 14px; padding: 8px 16px; }
+
+    /* ACTION MODULE TILES (MOBILE FRIENDLY) */
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .action-tile {
+      background: #f8fafc;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .action-tile:hover {
+      background: #ffffff;
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(30, 58, 138, 0.1);
+    }
+    .action-tile .icon { font-size: 32px; }
+    .action-tile h4 { font-size: 15px; font-weight: 700; color: var(--primary); }
+    .action-tile p { font-size: 12px; color: var(--text-muted); }
+
+    /* FORMS */
+    .form-group { margin-bottom: 16px; text-align: left; }
+    .form-group label { display: block; font-weight: 600; font-size: 14px; margin-bottom: 6px; color: #334155; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 14px;
+      background: white;
+    }
+
+    /* BADGES & PROGRESS BAR */
+    .user-profile-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #e0e7ff;
+      border: 1px solid #c7d2fe;
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .progress-box {
+      background: #f8fafc;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .progress-bar-bg {
+      background: #e2e8f0;
+      height: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-bar-fill {
+      background: linear-gradient(90deg, #10b981, #059669);
+      height: 100%;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .topic-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .badge { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .badge-done { background: #dcfce7; color: #166534; }
+    .badge-pending { background: #fee2e2; color: #991b1b; }
+
+    .note-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .ref-item {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      padding: 14px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .quiz-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .doubt-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+      background: #fafafa;
+    }
+    .preview-thumb {
+      max-width: 100%;
+      max-height: 150px;
+      border-radius: 6px;
+      margin-top: 8px;
+      border: 1px solid #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BANNER WITH CLEAR IMAGE -->
+  <div class="header-banner-container">
+    <img src="rmc-header.png" alt="Reena Mehta College Banner" class="header-banner-img" onerror="this.style.display='none'; document.getElementById('fallback-banner').style.display='block';">
+    <div id="fallback-banner" class="banner-fallback">
+      <h2>REENA MEHTA COLLEGE</h2>
+      <p>OF ARTS, SCIENCE, COMMERCE & MANAGEMENT STUDIES</p>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- 1. HOME SCREEN -->
+    <div id="page-home" class="card" style="text-align:center; max-width: 600px; margin: 30px auto;">
+      <h2 style="color:var(--primary); font-size:24px;">Syllabus Tracker & Learning Portal</h2>
+      <p style="color:var(--text-muted); margin: 8px 0 25px; font-size:14px;">Select your role to access dashboard</p>
+      
+      <div style="display:flex; flex-direction:column; gap: 12px; max-width: 280px; margin: auto;">
+        <button class="btn" style="padding: 14px;" onclick="goToPage('page-student-login')">
+          🎓 Student Login
+        </button>
+        <button class="btn btn-secondary" style="padding: 14px;" onclick="goToPage('page-faculty-login')">
+          👨‍🏫 Faculty Login
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. STUDENT LOGIN SCREEN -->
+    <div id="page-student-login" class="card" style="display:none; max-width: 480px; margin: 25px auto;">
+      <h2 style="margin-bottom: 6px; color:var(--primary);">Student Login</h2>
+      <p style="color:var(--text-muted); margin-bottom: 18px; font-size:13px;">Enter details to access syllabus, PDFs & tests</p>
+      
+      <div class="form-group">
+        <label>Student Full Name</label>
+        <input type="text" id="stu-login-name" placeholder="E.g., Sunita Yadav">
+      </div>
+      <div class="form-group">
+        <label>Roll Number</label>
+        <input type="text" id="stu-login-roll" placeholder="E.g., 26">
+      </div>
+      <div class="form-group">
+        <label>Select Stream (SY Courses):</label>
+        <select id="stu-login-stream">
+          <option value="SY.DS">SY.DS (B.Sc. Data Science)</option>
+          <option value="SY.IT">SY.IT (B.Sc. Information Technology)</option>
+          <option value="SY.CS">SY.CS (B.Sc. Computer Science)</option>
+          <option value="SY.BMS">SY.BMS</option>
+          <option value="SY.BAF">SY.BAF</option>
+          <option value="SY.BCOM">SY.BCOM</option>
+          <option value="SY.BA">SY.BA</option>
+          <option value="SY.BAMMC">SY.BAMMC</option>
+          <option value="SY.BSC-CHEM">SY.BSC (Chemistry)</option>
+          <option value="SY.BSC-ZOO">SY.BSC (Zoology)</option>
+          <option value="SY.BSC-HS">SY.BSC (Hospitality Studies)</option>
+        </select>
+      </div>
+      <button class="btn" style="width:100%;" onclick="authenticateStudent()">Enter Portal</button>
+      <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="goToPage('page-home')">Back to Home</button>
+    </div>
+
+    <!-- 3. STUDENT DASHBOARD -->
+    <div id="page-student-hub" class="card" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 15px;">
+        <h2 style="color:var(--primary); font-size:20px;">Student Academic Hub</h2>
+        <button class="btn btn-outline" style="padding:6px 12px; font-size:13px;" onclick="goToPage('page-home')">Logout</button>
+      </div>
+
+      <div class="user-profile-badge" id="student-badge-display"></div>
+
+      <div class="form-group" style="background:#f8fafc; padding:12px; border-radius:10px; border:1px solid var(--border);">
+        <label style="font-weight:700;">Select Subject:</label>
+        <select id="student-subject-select" onchange="updateStudentSubject()"></select>
+      </div>
+
+      <!-- Live Syllabus Progress Updated by Teacher -->
+      <div class="progress-box">
+        <div style="display:flex; justify-content:space-between; font-weight:600; font-size:13px;">
+          <span>Syllabus Progress (Daily Updated by Teacher)</span>
+          <span id="student-progress-text">0 / 0 Topics (0%)</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="student-progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- 5 DEDICATED SECTIONS -->
+      <h3>Academic Materials:</h3>
+      <div class="module-grid">
+        <div class="action-tile" onclick="openStudentPage('page-topic-view')">
+          <div class="icon">📘</div>
+          <h4>Syllabus Status</h4>
+          <p>Lecture topic tracking</p>
+        </div>
+
+        <div class="action-tile" onclick="openStudentPage('page-notes-view')">
+          <div class="icon">📥</div>
+          <h4>Notes & PDFs</h4>
+          <p>Download teacher notes</p>
+        </div>
+
+        <div class="action-tile" onclick="openStudentPage('page-book-view')">
+          <div class="icon">📚</div>
+          <h4>Reference Books</h4>
+          <p>MU NEP reference texts</p>
+        </div>
+
+        <div class="action-tile" onclick="openStudentPage('page-quiz-view')">
+          <div class="icon">✍️</div>
+          <h4>Practice Quiz</h4>
+          <p>Test subject knowledge</p>
+        </div>
+
+        <div class="action-tile" onclick="openStudentPage('page-doubt-view')">
+          <div class="icon">❓</div>
+          <h4>Ask a Doubt</h4>
+          <p>Upload question photo</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. STUDENT SYLLABUS STATUS (READ-ONLY) -->
+    <div id="page-topic-view" class="card" style="display:none;">
+      <button class="btn btn-back" onclick="goToPage('page-student-hub')">⬅ Back to Dashboard</button>
+      <h2 id="topic-page-title" style="color:var(--primary); font-size:18px; margin-bottom: 6px;"></h2>
+      <p style="color:var(--text-muted); margin-bottom: 18px; font-size:13px;">
+        🔒 Status is updated daily by your subject teacher during class lectures.
+      </p>
+      <div id="student-topics-list"></div>
+    </div>
+
+    <!-- 5. STUDENT NOTES & PDF DOWNLOAD VIEW -->
+    <div id="page-notes-view" class="card" style="display:none;">
+      <button class="btn btn-back" onclick="goToPage('page-student-hub')">⬅ Back to Dashboard</button>
+      <h2 id="notes-page-title" style="color:var(--primary); font-size:18px; margin-bottom: 6px;"></h2>
+      <p style="color:var(--text-muted); margin-bottom: 18px; font-size:13px;">Click to view or download materials shared by your teacher:</p>
+      <div id="student-notes-container"></div>
+    </div>
+
+    <!-- 6. STUDENT REFERENCE BOOKS -->
+    <div id="page-book-view" class="card" style="display:none;">
+      <button class="btn btn-back" onclick="goToPage('page-student-hub')">⬅ Back to Dashboard</button>
+      <h2 id="book-page-title" style="color:var(--primary); font-size:18px; margin-bottom: 8px;"></h2>
+      <p style="color:var(--text-muted); margin-bottom: 18px; font-size:13px;">University Prescribed Books (NEP Syllabus).</p>
+      <div id="books-list-container"></div>
+    </div>
+
+    <!-- 7. PRACTICE QUIZ -->
+    <div id="page-quiz-view" class="card" style="display:none;">
+      <button class="btn btn-back" onclick="goToPage('page-student-hub')">⬅ Back to Dashboard</button>
+      <h2 id="quiz-page-title" style="color:var(--primary); font-size:18px; margin-bottom: 8px;"></h2>
+      <div id="quiz-questions-container"></div>
+      <button class="btn btn-secondary" onclick="evaluateStudentQuiz()" style="margin-top: 15px;">Submit Answers</button>
+      <div id="quiz-score-display" style="margin-top:15px; font-weight:700;"></div>
+    </div>
+
+    <!-- 8. ASK DOUBT (WITH PHOTO UPLOAD) -->
+    <div id="page-doubt-view" class="card" style="display:none;">
+      <button class="btn btn-back" onclick="goToPage('page-student-hub')">⬅ Back to Dashboard</button>
+      <h2 id="doubt-page-title" style="color:var(--primary); font-size:18px; margin-bottom: 8px;"></h2>
+      <div class="form-group">
+        <label>Doubt Topic</label>
+        <input type="text" id="doubt-topic" placeholder="E.g., Step in algorithm">
+      </div>
+      <div class="form-group">
+        <label>Describe Doubt</label>
+        <textarea id="doubt-text" rows="3" placeholder="Explain your question..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Upload Question Photo</label>
+        <input type="file" id="doubt-img-input" accept="image/*">
+      </div>
+      <button class="btn" onclick="submitStudentDoubt()">Send to Teacher</button>
+    </div>
+
+    <!-- 9. FACULTY LOGIN (TEACHER SELECTS HER ASSIGNED SUBJECT) -->
+    <div id="page-faculty-login" class="card" style="display:none; max-width: 480px; margin: 25px auto;">
+      <h2 style="color:var(--primary); margin-bottom: 6px;">Faculty Portal</h2>
+      <p style="color:var(--text-muted); margin-bottom: 18px; font-size:13px;">Select your assigned subject to login</p>
+      
+      <div class="form-group">
+        <label>Faculty Full Name</label>
+        <input type="text" id="faculty-name-input" placeholder="E.g., Prof. Sharma">
+      </div>
+      <div class="form-group">
+        <label>Select Stream</label>
+        <select id="faculty-stream-input" onchange="syncFacultySubjectOptions()">
+          <option value="SY.DS">SY.DS (Data Science)</option>
+          <option value="SY.IT">SY.IT (Information Technology)</option>
+          <option value="SY.CS">SY.CS (Computer Science)</option>
+          <option value="SY.BMS">SY.BMS</option>
+          <option value="SY.BAF">SY.BAF</option>
+          <option value="SY.BCOM">SY.BCOM</option>
+          <option value="SY.BA">SY.BA</option>
+          <option value="SY.BAMMC">SY.BAMMC</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Your Assigned Subject (You will only see this):</label>
+        <select id="faculty-assigned-sub"></select>
+      </div>
+      <div class="form-group">
+        <label>Password (Default: rmc123)</label>
+        <input type="password" id="faculty-pwd-input" placeholder="Enter password">
+      </div>
+      <button class="btn" style="width:100%;" onclick="authenticateFaculty()">Login to My Subject</button>
+      <button class="btn btn-outline" style="width:100%; margin-top:8px;" onclick="goToPage('page-home')">Back to Home</button>
+    </div>
+
+    <!-- 10. FACULTY DASHBOARD (RESTRICTED ONLY TO HER SUBJECT) -->
+    <div id="page-faculty-dashboard" class="card" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:10px;">
+        <div>
+          <h2 id="faculty-greeting" style="color:var(--primary); font-size:20px;">Faculty Dashboard</h2>
+          <div id="faculty-subject-tag" style="font-weight:700; color:var(--secondary); font-size:14px; margin-top:4px;"></div>
+        </div>
+        <button class="btn btn-outline" style="padding:6px 14px; font-size:13px;" onclick="goToPage('page-home')">Logout</button>
+      </div>
+
+      <!-- TEACHER DAILY TOPIC TICKER (ONLY HER SUBJECT) -->
+      <div style="background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:12px; padding:18px; margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap;">
+          <h3 style="color:var(--primary); font-size:16px;">👨‍🏫 Mark Taught Topics (Today's Lecture)</h3>
+          <span id="faculty-progress-stat" style="font-weight:700; color:var(--accent); font-size:13px;"></span>
+        </div>
+        <div id="teacher-topics-list"></div>
+      </div>
+
+      <!-- TEACHER PDF / NOTES UPLOAD SECTION -->
+      <div style="background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:12px; padding:18px; margin-bottom:20px;">
+        <h3 style="color:var(--primary); font-size:16px; margin-bottom:6px;">📤 Upload Lecture Notes / PDF for Students</h3>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Files uploaded here will directly appear on your students' phones.</p>
+        
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+          <div>
+            <label style="font-size:12px; font-weight:600;">Chapter / Material Title</label>
+            <input type="text" id="teacher-note-title" placeholder="E.g., Unit 1 Notes & Question Bank" style="width:100%; padding:8px 12px; border-radius:6px; border:1px solid #cbd5e1; font-size:13px;">
+          </div>
+          <div>
+            <label style="font-size:12px; font-weight:600;">Select Document / PDF</label>
+            <input type="file" id="teacher-note-file" style="width:100%; padding:6px; border-radius:6px; border:1px solid #cbd5e1; font-size:13px; background:white;">
+          </div>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:12px; padding:8px 16px; font-size:13px;" onclick="uploadTeacherNote()">Publish to Students</button>
+      </div>
+
+      <!-- DOUBT ANALYTICS (ONLY FOR TEACHER'S SUBJECT) -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
+        <div style="background:white; padding:16px; border:1px solid var(--border); border-radius:12px; text-align:center;">
+          <h3 style="font-size:15px; margin-bottom:8px;">Doubt Status in Your Subject</h3>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Doubt ratio for this paper</p>
+          <div style="max-width:250px; margin:auto;">
+            <canvas id="facultyPieCanvas"></canvas>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size:15px;">Your Student Doubts (<span id="faculty-doubt-count">0</span>)</h3>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:12px;">Review student photos and questions</p>
+          <div id="faculty-doubt-container" style="max-height:400px; overflow-y:auto;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // --- 1. SUBJECTS MAPPING FROM TIMETABLE ---
+    const streamSubjects = {
+      "SY.DS": [
+        "Design and Analysis of Algorithms",
+        "Data Warehousing",
+        "Data Mining",
+        "Linear Algebra",
+        "E-Commerce Digital Banking & Insurance Services"
+      ],
+      "SY.IT": [
+        "Python Programming",
+        "Data Structure",
+        "Operating System",
+        "Applied Mathematics",
+        "E-Commerce Digital Banking & Insurance Services"
+      ],
+      "SY.CS": [
+        "Advanced Python",
+        "Database Management",
+        "Computer Networks",
+        "Linear Algebra"
+      ],
+      "SY.BMS": [
+        "Financial Management",
+        "Marketing Research",
+        "Introduction to Financial Services",
+        "Consumer Behaviour"
+      ],
+      "SY.BAF": [
+        "Financial Accounting - III",
+        "Cost Accounting - I",
+        "Mutual Fund Distributors - I"
+      ],
+      "SY.BCOM": [
+        "Management: Principles And Functions",
+        "Accountancy & Financial Management - III",
+        "Advertising - I"
+      ],
+      "SY.BA": [
+        "PSY - Developmental Psychology",
+        "ECO - Macro Economics I",
+        "Banking in India I"
+      ],
+      "SY.BAMMC": [
+        "Electronic Media",
+        "Film Communication - 1",
+        "Web Designing with WordPress"
+      ],
+      "SY.BSC-CHEM": [
+        "Progressive Physical and Analytical Chemistry I",
+        "Progressive Inorganic & Organic Chemistry I"
+      ],
+      "SY.BSC-ZOO": ["Cell Biology", "Biochemistry"],
+      "SY.BSC-HS": ["Intermediate Culinary Operations I", "Hospitality Marketing & Sales"]
+    };
+
+    // --- 2. TOPICS DATABASE ---
+    let syllabusDatabase = {
+      "Design and Analysis of Algorithms": [
+        { title: "Analysis Framework & Asymptotic Notations", done: true, updatedOn: "Completed on 05 Oct" },
+        { title: "Linked Lists: Singly, Doubly, and Circular Linked Lists", done: true, updatedOn: "Completed on 07 Oct" },
+        { title: "Stacks ADT & Balanced Parentheses Evaluation", done: false, updatedOn: "" },
+        { title: "Queues ADT & Circular Queue Implementation", done: false, updatedOn: "" },
+        { title: "Binary Trees, BST & AVL Balanced Trees", done: false, updatedOn: "" },
+        { title: "Graph Algorithms: BFS, DFS, Dijkstra & MST", done: false, updatedOn: "" },
+        { title: "Sorting Algorithms: Quick Sort, Merge Sort, Heap Sort", done: false, updatedOn: "" },
+        { title: "Searching: Binary Search & Interpolation Search", done: false, updatedOn: "" }
+      ],
+      "Data Warehousing": [
+        { title: "Evolution of Decision Support Systems (DSS)", done: true, updatedOn: "Completed on 06 Oct" },
+        { title: "Data Warehouse Architectures (Single, 2 & 3-tier)", done: false, updatedOn: "" },
+        { title: "ETL Process vs ELT Pipelines", done: false, updatedOn: "" },
+        { title: "OLAP Operations (Roll-up, Drill-down, Slice, Dice)", done: false, updatedOn: "" },
+        { title: "Dimensional Modeling (Star & Snowflake Schema)", done: false, updatedOn: "" },
+        { title: "Fact and Dimension Tables & Multi-Dimensional Data", done: false, updatedOn: "" }
+      ],
+      "Data Mining": [
+        { title: "Data Preprocessing: Cleaning, Integration, Reduction", done: true, updatedOn: "Completed on 08 Oct" },
+        { title: "Mining Frequent Patterns & Apriori Algorithm", done: false, updatedOn: "" },
+        { title: "Classification: Decision Tree Induction (ID3), Naive Bayes", done: false, updatedOn: "" },
+        { title: "Cluster Analysis: K-Means & Hierarchical Clustering", done: false, updatedOn: "" },
+        { title: "Graph Mining, Spatial & Web Mining", done: false, updatedOn: "" }
+      ],
+      "Linear Algebra": [
+        { title: "Systems of Linear Equations (Gaussian Elimination)", done: true, updatedOn: "Completed on 06 Oct" },
+        { title: "Vectors and Vector Spaces: Linear Independence, Basis", done: false, updatedOn: "" },
+        { title: "Linear Transformations, Kernel, Nullity & Rank Theorem", done: false, updatedOn: "" },
+        { title: "Inner Product Spaces & Gram-Schmidt Process", done: false, updatedOn: "" },
+        { title: "Determinants, Eigenvalues, Eigenvectors & Cayley-Hamilton", done: false, updatedOn: "" }
+      ]
+    };
+
+    // --- 3. UPLOADED NOTES / PDF REPOSITORY ---
+    let notesDatabase = {
+      "Design and Analysis of Algorithms": [
+        { title: "Module 1 - Algorithm Analysis & Time Complexity Handout", fileData: "#", fileName: "DAA_Module1_Notes.pdf", date: "Uploaded on 06 Oct" }
+      ],
+      "Data Mining": [
+        { title: "Data Preprocessing Summary Sheet", fileData: "#", fileName: "DataMining_Unit1.pdf", date: "Uploaded on 08 Oct" }
+      ]
+    };
+
+    // --- 4. BOOKS & QUIZ DATA ---
+    const sydsDetails = {
+      "Design and Analysis of Algorithms": {
+        books: [
+          "1. Introduction to Design and Analysis of Algorithms - Anany Levitin (3rd Ed., Pearson)",
+          "2. Data Structures and Algorithms Made Easy - Narasimha Karumanchi (CareerMonk)"
+        ],
+        quiz: [
+          { q: "What is the worst-case time complexity of Quick Sort?", opts: ["O(n log n)", "O(n^2)", "O(n)", "O(1)"], a: 1 },
+          { q: "Which data structure follows LIFO order?", opts: ["Stack", "Queue", "Tree", "Graph"], a: 0 }
+        ]
+      },
+      "Data Warehousing": {
+        books: [
+          "1. Data Warehousing and Mining - Dr. Arti Deshpande & Dr. Pallavi Halarnkaer (TechKnowledge)",
+          "2. Data Warehousing Fundamentals for IT Professionals - Paulraj Ponniah (Wiley)",
+          "3. Building the Data Warehouse - William H. Inmon (Wiley Publishing)"
+        ],
+        quiz: [
+          { q: "Which schema has normalized dimension tables?", opts: ["Star Schema", "Snowflake Schema", "Fact Constellation", "Relational Schema"], a: 1 },
+          { q: "What does ETL stand for?", opts: ["Extract, Transform, Load", "Encode Transfer Link", "Estimate Test Logic", "None"], a: 0 }
+        ]
+      },
+      "Data Mining": {
+        books: [
+          "1. Data Mining: Concepts and Techniques - Jiawei Han & Micheline Kamber (Elsevier)",
+          "2. Data Mining: Introductory and Advanced Topics - Margaret H. Dunham (Pearson)",
+          "3. Principles of Data Mining - David Hand, Heikki Mannila, Padhraic Smyth"
+        ],
+        quiz: [
+          { q: "Which is an Unsupervised Learning task?", opts: ["Clustering (K-Means)", "Classification", "Linear Regression", "Decision Tree"], a: 0 },
+          { q: "Apriori algorithm is used for:", opts: ["Association Rule Mining", "Sorting Numbers", "Image Processing", "Sound Editing"], a: 0 }
+        ]
+      },
+      "Linear Algebra": {
+        books: [
+          "1. Linear Algebra - Seymour Lipschutz & Marc Lipson (Schaum's Outlines, McGraw Hill)",
+          "2. Coding the Matrix - Philip Klein",
+          "3. Linear Algebra and Its Applications - David C. Lay (Pearson)"
+        ],
+        quiz: [
+          { q: "The eigenvalues of a diagonal matrix are its:", opts: ["Determinant", "Diagonal entries", "Trace value", "Row sums"], a: 1 }
+        ]
+      }
+    };
+
+    // State Variables
+    let currentStudent = { name: "", roll: "", stream: "" };
+    let currentStudentSubject = "";
+    let currentFaculty = { name: "", stream: "", subject: "" };
+    let doubtsDB = [
+      { id: 1, name: "Aakash Singh", roll: "12", stream: "SY.DS", sub: "Design and Analysis of Algorithms", topic: "Dijkstra Algorithm", text: "How to handle negative weights?", img: "" },
+      { id: 2, name: "Sneha Nair", roll: "34", stream: "SY.DS", sub: "Data Mining", topic: "ID3 Decision Tree", text: "Can you re-explain Information Gain?", img: "" },
+      { id: 3, name: "Rahul Sharma", roll: "09", stream: "SY.DS", sub: "Design and Analysis of Algorithms", topic: "AVL Tree", text: "Doubt in LR double rotation.", img: "" }
+    ];
+    let pieChartInstance = null;
+
+    // --- NAVIGATION ---
+    function goToPage(pageId) {
+      const allPages = [
+        'page-home', 'page-student-login', 'page-student-hub',
+        'page-topic-view', 'page-notes-view', 'page-book-view', 'page-quiz-view', 'page-doubt-view',
+        'page-faculty-login', 'page-faculty-dashboard'
+      ];
+      allPages.forEach(p => {
+        const el = document.getElementById(p);
+        if (el) el.style.display = 'none';
+      });
+      document.getElementById(pageId).style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+
+    // --- STUDENT SETUP ---
+    function authenticateStudent() {
+      const name = document.getElementById('stu-login-name').value.trim();
+      const roll = document.getElementById('stu-login-roll').value.trim();
+      const stream = document.getElementById('stu-login-stream').value;
+
+      if (!name || !roll) {
+        alert("Please enter Name and Roll Number.");
+        return;
+      }
+
+      currentStudent = { name, roll, stream };
+      document.getElementById('student-badge-display').innerHTML = `
+        <div style="font-size: 24px;">👤</div>
+        <div>
+          <strong>${currentStudent.name}</strong> (Roll: ${currentStudent.roll})<br>
+          <span style="color:#4338ca; font-weight:600;">Stream: ${currentStudent.stream}</span>
+        </div>
+      `;
+
+      const select = document.getElementById('student-subject-select');
+      select.innerHTML = "";
+      (streamSubjects[stream] || []).forEach(s => {
+        let opt = document.createElement("option");
+        opt.value = s;
+        opt.innerText = s;
+        select.appendChild(opt);
+      });
+
+      updateStudentSubject();
+      goToPage('page-student-hub');
+    }
+
+    function updateStudentSubject() {
+      currentStudentSubject = document.getElementById('student-subject-select').value;
+      updateStudentProgress();
+    }
+
+    function updateStudentProgress() {
+      ensureSubjectInitialized(currentStudentSubject);
+      const list = syllabusDatabase[currentStudentSubject];
+      const completed = list.filter(t => t.done).length;
+      const total = list.length;
+      const pct = total === 0 ? 0 : Math.round((completed / total) * 100);
+
+      document.getElementById('student-progress-text').innerText = `${completed} / ${total} Topics (${pct}%)`;
+      document.getElementById('student-progress-fill').style.width = `${pct}%`;
+    }
+
+    function ensureSubjectInitialized(sub) {
+      if (!syllabusDatabase[sub]) {
+        syllabusDatabase[sub] = [
+          { title: "Unit 1: Fundamentals and Theoretical Foundations", done: false, updatedOn: "" },
+          { title: "Unit 2: Core Concepts & Applications", done: false, updatedOn: "" },
+          { title: "Unit 3: Case Studies & Practical Implementations", done: false, updatedOn: "" }
+        ];
+      }
+    }
+
+    // --- STUDENT BUTTON VIEWS ---
+    function openStudentPage(targetPageId) {
+      updateStudentSubject();
+
+      if (targetPageId === 'page-topic-view') {
+        document.getElementById('topic-page-title').innerText = `Syllabus Status: ${currentStudentSubject}`;
+        renderStudentTopics();
+      } else if (targetPageId === 'page-notes-view') {
+        document.getElementById('notes-page-title').innerText = `Notes & Documents: ${currentStudentSubject}`;
+        renderStudentNotes();
+      } else if (targetPageId === 'page-book-view') {
+        document.getElementById('book-page-title').innerText = `Reference Books: ${currentStudentSubject}`;
+        renderBooks(currentStudentSubject);
+      } else if (targetPageId === 'page-quiz-view') {
+        document.getElementById('quiz-page-title').innerText = `Practice Quiz: ${currentStudentSubject}`;
+        renderQuiz(currentStudentSubject);
+      } else if (targetPageId === 'page-doubt-view') {
+        document.getElementById('doubt-page-title').innerText = `Ask Doubt: ${currentStudentSubject}`;
+      }
+
+      goToPage(targetPageId);
+    }
+
+    function renderStudentTopics() {
+      const cont = document.getElementById('student-topics-list');
+      cont.innerHTML = "";
+      syllabusDatabase[currentStudentSubject].forEach((t) => {
+        cont.innerHTML += `
+          <div class="topic-card">
+            <div>
+              <div style="font-weight:600; font-size:14px; color:${t.done ? '#1e293b' : '#64748b'};">
+                ${t.done ? '✅' : '⏳'} ${t.title}
+              </div>
+              <div style="font-size:11px; color:#64748b; margin-top:3px;">
+                ${t.done ? (t.updatedOn || 'Completed in Lecture') : 'Pending Lecture'}
+              </div>
+            </div>
+            <span class="badge ${t.done ? 'badge-done' : 'badge-pending'}">
+              ${t.done ? 'COMPLETED' : 'PENDING'}
+            </span>
+          </div>
+        `;
+      });
+    }
+
+    function renderStudentNotes() {
+      const cont = document.getElementById('student-notes-container');
+      cont.innerHTML = "";
+      const notes = notesDatabase[currentStudentSubject] || [];
+
+      if (notes.length === 0) {
+        cont.innerHTML = "<p style='color:#64748b; font-size:14px;'>No lecture notes or PDFs uploaded yet for this subject.</p>";
+        return;
+      }
+
+      notes.forEach((n) => {
+        cont.innerHTML += `
+          <div class="note-item">
+            <div>
+              <strong>📄 ${n.title}</strong>
+              <div style="font-size:12px; color:#64748b; margin-top:2px;">${n.fileName} &bull; ${n.date}</div>
+            </div>
+            <a href="${n.fileData}" download="${n.fileName}" class="btn" style="padding:6px 14px; font-size:13px; text-decoration:none;">
+              ⬇ Download
+            </a>
+          </div>
+        `;
+      });
+    }
+
+    function renderBooks(sub) {
+      const cont = document.getElementById('books-list-container');
+      cont.innerHTML = "";
+      const detail = sydsDetails[sub];
+      if (detail && detail.books) {
+        detail.books.forEach(b => {
+          cont.innerHTML += `<div class="ref-item">📖 ${b}</div>`;
+        });
+      } else {
+        cont.innerHTML = `<div class="ref-item">📖 Standard University prescribed textbook for ${sub}.</div>`;
+      }
+    }
+
+    function renderQuiz(sub) {
+      const cont = document.getElementById('quiz-questions-container');
+      cont.innerHTML = "";
+      document.getElementById('quiz-score-display').innerText = "";
+      const detail = sydsDetails[sub];
+      if (detail && detail.quiz) {
+        detail.quiz.forEach((qItem, qIdx) => {
+          let opts = qItem.opts.map((opt, oIdx) => `
+            <label style="display:flex; align-items:center; gap:8px; margin-top:6px; cursor:pointer;">
+              <input type="radio" name="q-${qIdx}" value="${oIdx}">
+              <span>${opt}</span>
+            </label>
+          `).join('');
+          cont.innerHTML += `
+            <div class="quiz-box">
+              <strong>Question ${qIdx + 1}: ${qItem.q}</strong>
+              <div style="margin-top:8px;">${opts}</div>
+            </div>
+          `;
+        });
+      } else {
+        cont.innerHTML = "<p>Practice MCQs will be uploaded soon.</p>";
+      }
+    }
+
+    function evaluateStudentQuiz() {
+      const detail = sydsDetails[currentStudentSubject];
+      if (!detail || !detail.quiz) return;
+      let score = 0;
+      detail.quiz.forEach((qItem, qIdx) => {
+        const checked = document.querySelector(`input[name="q-${qIdx}"]:checked`);
+        if (checked && parseInt(checked.value) === qItem.a) score++;
+      });
+      document.getElementById('quiz-score-display').innerHTML = `
+        <span style="color:var(--accent);">✅ You Scored: ${score} out of ${detail.quiz.length}</span>
+      `;
+    }
+
+    function submitStudentDoubt() {
+      const topic = document.getElementById('doubt-topic').value.trim();
+      const text = document.getElementById('doubt-text').value.trim();
+      const fileInput = document.getElementById('doubt-img-input');
+
+      if (!topic || !text) {
+        alert("Please fill in the topic and question description.");
+        return;
+      }
+
+      if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          saveDoubt(topic, text, e.target.result);
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        saveDoubt(topic, text, "");
+      }
+    }
+
+    function saveDoubt(topic, text, imgBase64) {
+      doubtsDB.push({
+        id: Date.now(),
+        name: currentStudent.name || "Student",
+        roll: currentStudent.roll || "N/A",
+        stream: currentStudent.stream || "SY",
+        sub: currentStudentSubject,
+        topic: topic,
+        text: text,
+        img: imgBase64
+      });
+
+      alert("Doubt sent successfully to your teacher!");
+      document.getElementById('doubt-topic').value = "";
+      document.getElementById('doubt-text').value = "";
+      document.getElementById('doubt-img-input').value = "";
+      goToPage('page-student-hub');
+    }
+
+    // --- 5. FACULTY LOGIN & DASHBOARD (RESTRICTED TO HER SUBJECT) ---
+    function syncFacultySubjectOptions() {
+      const stream = document.getElementById('faculty-stream-input').value;
+      const subSelect = document.getElementById('faculty-assigned-sub');
+      subSelect.innerHTML = "";
+      (streamSubjects[stream] || []).forEach(s => {
+        let opt = document.createElement("option");
+        opt.value = s;
+        opt.innerText = s;
+        subSelect.appendChild(opt);
+      });
+    }
+    syncFacultySubjectOptions();
+
+    function authenticateFaculty() {
+      const name = document.getElementById('faculty-name-input').value.trim();
+      const stream = document.getElementById('faculty-stream-input').value;
+      const subject = document.getElementById('faculty-assigned-sub').value;
+      const pwd = document.getElementById('faculty-pwd-input').value.trim();
+
+      if (!name) { alert("Enter your name"); return; }
+      if (pwd !== "rmc123") { alert("Wrong password! Default: rmc123"); return; }
+
+      currentFaculty = { name, stream, subject };
+
+      document.getElementById('faculty-greeting').innerText = `Faculty: Prof. ${name}`;
+      document.getElementById('faculty-subject-tag').innerText = `Assigned Subject: ${subject} (${stream})`;
+
+      loadFacultySubjectDashboard();
+      goToPage('page-faculty-dashboard');
+    }
+
+    function loadFacultySubjectDashboard() {
+      const sub = currentFaculty.subject;
+      ensureSubjectInitialized(sub);
+      const list = syllabusDatabase[sub];
+      const cont = document.getElementById('teacher-topics-list');
+      cont.innerHTML = "";
+
+      let completedCount = 0;
+      list.forEach((t, i) => {
+        if (t.done) completedCount++;
+        cont.innerHTML += `
+          <div class="topic-card" style="background:white;">
+            <div style="display:flex; align-items:center; gap: 10px;">
+              <input type="checkbox" id="teacher-chk-${i}" style="width:18px; height:18px; cursor:pointer;" ${t.done ? 'checked' : ''} onchange="teacherToggleTopic('${sub}', ${i})">
+              <div>
+                <label for="teacher-chk-${i}" style="cursor:pointer; font-weight:600; font-size:13px;">${t.title}</label>
+                <div style="font-size:11px; color:#64748b;" id="teacher-time-${i}">
+                  ${t.done ? (t.updatedOn || 'Completed') : 'Not yet completed'}
+                </div>
+              </div>
+            </div>
+            <span class="badge ${t.done ? 'badge-done' : 'badge-pending'}" id="teacher-badge-${i}">
+              ${t.done ? 'DONE' : 'PENDING'}
+            </span>
+          </div>
+        `;
+      });
+
+      const pct = list.length ? Math.round((completedCount / list.length) * 100) : 0;
+      document.getElementById('faculty-progress-stat').innerText = `Progress: ${completedCount}/${list.length} Topics Taught (${pct}%)`;
+
+      // Filter Doubts ONLY for this teacher's subject
+      const subjectDoubts = doubtsDB.filter(d => d.sub === sub);
+      document.getElementById('faculty-doubt-count').innerText = subjectDoubts.length;
+
+      const doubtCont = document.getElementById('faculty-doubt-container');
+      doubtCont.innerHTML = "";
+      if (subjectDoubts.length === 0) {
+        doubtCont.innerHTML = "<p style='color:#64748b; font-size:13px;'>No doubts submitted yet for this subject.</p>";
+      } else {
+        subjectDoubts.forEach(d => {
+          doubtCont.innerHTML += `
+            <div class="doubt-card">
+              <strong>${d.name} (Roll: ${d.roll})</strong>
+              <div style="font-weight:600; font-size:13px; margin: 3px 0; color:var(--primary);">Topic: ${d.topic}</div>
+              <p style="font-size:13px; color:#334155;">${d.text}</p>
+              ${d.img ? `<img src="${d.img}" class="preview-thumb" alt="Question Photo">` : '<span style="font-size:11px; color:#94a3b8; display:block; margin-top:4px;">(No photo attached)</span>'}
+            </div>
+          `;
+        });
+      }
+
+      // Pie Chart for Teacher's Subject Doubts
+      const totalStudentsAssumed = 60;
+      const doubtCount = subjectDoubts.length;
+      const clearCount = Math.max(totalStudentsAssumed - doubtCount, 0);
+
+      if (pieChartInstance) pieChartInstance.destroy();
+      const ctx = document.getElementById('facultyPieCanvas').getContext('2d');
+      pieChartInstance = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Students with Doubts', 'Doubts Cleared / No Doubts'],
+          datasets: [{
+            data: [doubtCount, clearCount],
+            backgroundColor: ['#ef4444', '#10b981']
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { position: 'bottom' } }
+        }
+      });
+    }
+
+    function teacherToggleTopic(sub, index) {
+      const chk = document.getElementById(`teacher-chk-${index}`);
+      const isDone = chk.checked;
+      const now = new Date();
+      const dateStr = `Completed on ${now.getDate().toString().padStart(2, '0')} Oct`;
+
+      syllabusDatabase[sub][index].done = isDone;
+      syllabusDatabase[sub][index].updatedOn = isDone ? dateStr : "";
+
+      const badge = document.getElementById(`teacher-badge-${index}`);
+      const timeLbl = document.getElementById(`teacher-time-${index}`);
+      if (isDone) {
+        badge.className = "badge badge-done";
+        badge.innerText = "DONE";
+        timeLbl.innerText = dateStr;
+      } else {
+        badge.className = "badge badge-pending";
+        badge.innerText = "PENDING";
+        timeLbl.innerText = "Not yet completed";
+      }
+
+      const total = syllabusDatabase[sub].length;
+      const doneCnt = syllabusDatabase[sub].filter(t => t.done).length;
+      const pct = Math.round((doneCnt / total) * 100);
+      document.getElementById('faculty-progress-stat').innerText = `Progress: ${doneCnt}/${total} Topics Taught (${pct}%)`;
+    }
+
+    // --- TEACHER NOTES / PDF UPLOAD ---
+    function uploadTeacherNote() {
+      const title = document.getElementById('teacher-note-title').value.trim();
+      const fileInput = document.getElementById('teacher-note-file');
+      const sub = currentFaculty.subject;
+
+      if (!title || !fileInput.files || fileInput.files.length === 0) {
+        alert("Please enter a title and select a document/PDF file.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        if (!notesDatabase[sub]) notesDatabase[sub] = [];
+        const now = new Date();
+        notesDatabase[sub].push({
+          title: title,
+          fileName: file.name,
+          fileData: e.target.result,
+          date: `Uploaded on ${now.getDate().toString().padStart(2, '0')} Oct`
+        });
+
+        alert("Notes / PDF published successfully! Students can now download it directly.");
+        document.getElementById('teacher-note-title').value = "";
+        document.getElementById('teacher-note-file').value = "";
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
