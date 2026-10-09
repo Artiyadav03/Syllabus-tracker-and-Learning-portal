@@ -1063,25 +1063,28 @@
   const docRef = doc(db, "portalData", "syllabusState");
 
   // Real-time listener: data cloud se fetch karke page par reflect karega
-  onSnapshot(docRef, (docSnap) => {
-    if (docSnap.exists()) {
-      const remoteData = docSnap.data();
-      localStorage.setItem("syllabusTrackerData", JSON.stringify(remoteData));
-      if (typeof renderTopics === "function") renderTopics();
-      if (typeof updateStats === "function") updateStats();
-    }
-  });
+    onSnapshot(docRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const remoteData = docSnap.data();
+        if (remoteData && remoteData.syllabusDatabase) {
+          syllabusDatabase = remoteData.syllabusDatabase;
+          if (typeof renderStudentTopics === "function") {
+            renderStudentTopics();
+          }
+          if (typeof updateStats === "function") updateStats();
+        }
+      }
+    });
 
-  // Global function: faculty ke save karte hi cloud par push karega
-  window.syncToCloud = async function() {
-    const localData = JSON.parse(localStorage.getItem("syllabusTrackerData") || "{}");
-    try {
-      await setDoc(docRef, localData);
-      console.log("Synced to Firebase Firestore successfully!");
-    } catch (err) {
-      console.error("Cloud sync error: ", err);
-    }
-  };
+    // Global function: faculty ke save karte hi cloud par push karega
+    window.syncToCloud = async function() {
+      try {
+        await setDoc(docRef, { syllabusDatabase: syllabusDatabase });
+        console.log("Synced to Firebase Firestore successfully!");
+      } catch (err) {
+        console.error("Cloud sync error: ", err);
+      }
+    };
   // Auto-sync whenever localStorage changes
 const originalSetItem = localStorage.setItem;
 localStorage.setItem = function(key, value) {
