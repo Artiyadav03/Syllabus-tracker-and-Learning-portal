@@ -1041,5 +1041,47 @@
       reader.readAsDataURL(file);
     }
   </script>
+<!-- Firebase SDKs -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyB2aFFDNiq6V5KA0TYxMnmQb3uvyeSvUBA",
+    authDomain: "rmc-portal-1524f.firebaseapp.com",
+    projectId: "rmc-portal-1524f",
+    storageBucket: "rmc-portal-1524f.firebasestorage.app",
+    messagingSenderId: "644796530314",
+    appId: "1:644796530314:web:1e2d16c2834ca0af7f773",
+    measurementId: "G-2XFJ1QLT97"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // Firestore sync setup
+  const docRef = doc(db, "portalData", "syllabusState");
+
+  // Real-time listener: data cloud se fetch karke page par reflect karega
+  onSnapshot(docRef, (docSnap) => {
+    if (docSnap.exists()) {
+      const remoteData = docSnap.data();
+      localStorage.setItem("syllabusTrackerData", JSON.stringify(remoteData));
+      if (typeof renderTopics === "function") renderTopics();
+      if (typeof updateStats === "function") updateStats();
+    }
+  });
+
+  // Global function: faculty ke save karte hi cloud par push karega
+  window.syncToCloud = async function() {
+    const localData = JSON.parse(localStorage.getItem("syllabusTrackerData") || "{}");
+    try {
+      await setDoc(docRef, localData);
+      console.log("Synced to Firebase Firestore successfully!");
+    } catch (err) {
+      console.error("Cloud sync error: ", err);
+    }
+  };
+</script>
 </body>
 </html>
