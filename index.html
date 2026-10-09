@@ -1082,6 +1082,14 @@
       console.error("Cloud sync error: ", err);
     }
   };
+  // Auto-sync whenever localStorage changes
+const originalSetItem = localStorage.setItem;
+localStorage.setItem = function(key, value) {
+  originalSetItem.apply(this, arguments);
+  if (key === "syllabusTrackerData" && window.syncToCloud) {
+    window.syncToCloud();
+  }
+};
 </script>
 </body>
 </html>
