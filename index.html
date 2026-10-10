@@ -1009,6 +1009,7 @@
       const doneCnt = syllabusDatabase[sub].filter(t => t.done).length;
       const pct = Math.round((doneCnt / total) * 100);
       document.getElementById('faculty-progress-stat').innerText = `Progress: ${doneCnt}/${total} Topics Taught (${pct}%)`;
+      if (typeof window.syncToCloud === "function") window.syncToCloud();
     }
 
     // --- TEACHER NOTES / PDF UPLOAD ---
