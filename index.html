@@ -1060,16 +1060,18 @@
   const db = getFirestore(app);
 
   // Firestore sync setup
-  const docRef = doc(db, "portalData", "syllabusState");
+ const docRef = doc(db, "rmc-portal-1524f", "syllabusState");
 
-  // Real-time listener: data cloud se fetch karke page par reflect karega
+    // Real-time listener: data cloud se fetch karke page par reflect karega
     onSnapshot(docRef, (docSnap) => {
       if (docSnap.exists()) {
         const remoteData = docSnap.data();
-        if (remoteData && remoteData.syllabusDatabase) {
-          syllabusDatabase = remoteData.syllabusDatabase;
+        const incomingData = remoteData.data || remoteData.syllabusDatabase;
+        if (incomingData) {
+          syllabusDatabase = incomingData;
           if (typeof renderStudentTopics === "function") {
-            renderStudentTopics();
+            const activeSub = document.getElementById("student-subject-select")?.value || "Design and Analysis of Algorithms";
+            renderStudentTopics(activeSub);
           }
           if (typeof updateStats === "function") updateStats();
         }
@@ -1085,14 +1087,6 @@
         console.error("Cloud sync error: ", err);
       }
     };
-  // Auto-sync whenever localStorage changes
-const originalSetItem = localStorage.setItem;
-localStorage.setItem = function(key, value) {
-  originalSetItem.apply(this, arguments);
-  if (key === "syllabusTrackerData" && window.syncToCloud) {
-    window.syncToCloud();
-  }
-};
 </script>
 </body>
 </html>
