@@ -1061,20 +1061,25 @@
   const db = getFirestore(app);
 
   // Firestore sync setup
- const docRef = doc(db, "rmc-portal-1524f", "syllabusState");
+const docRef = doc(db, "rmc-portal-1524f", "syllabusState");
 
     // Real-time listener: data cloud se fetch karke page par reflect karega
     onSnapshot(docRef, (docSnap) => {
       if (docSnap.exists()) {
         const remoteData = docSnap.data();
         const incomingData = remoteData.data || remoteData.syllabusDatabase;
-        if (incomingData) {
+        if (incomingData && typeof incomingData === "object") {
           syllabusDatabase = incomingData;
-          if (typeof renderStudentTopics === "function") {
-            const activeSub = document.getElementById("student-subject-select")?.value || "Design and Analysis of Algorithms";
+          
+          const selectEl = document.getElementById("student-subject-select");
+          const activeSub = (selectEl && selectEl.value) ? selectEl.value : Object.keys(syllabusDatabase)[0];
+
+          if (typeof renderStudentTopics === "function" && syllabusDatabase[activeSub]) {
             renderStudentTopics(activeSub);
           }
-          if (typeof updateStats === "function") updateStats();
+          if (typeof updateStats === "function") {
+            updateStats();
+          }
         }
       }
     });
